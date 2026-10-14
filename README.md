@@ -11,8 +11,7 @@ normally allows.
 
 ![The Brightening popover in dark appearance, with the power button on, the Level slider at 160 percent, Launch at Login checked, and the About and Quit buttons](Screenshots/popover.png)
 
-Everything happens on your Mac and the app never connects to the internet. That
-means there is no account to create and no server involved.
+Everything happens on your Mac and the app never connects to the internet.
 
 ## What it does
 
