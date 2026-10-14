@@ -1,33 +1,29 @@
 The Brightening is a small menu bar app that lets everyday content on a
-MacBook Pro's Liquid Retina XDR display get brighter than the display
-normally allows. Click the menu bar icon, turn the boost on, and choose a
-level.
+MacBook Pro's Liquid Retina XDR display get brighter than the display normally
+allows. Click the menu bar icon to turn the boost on and set the level.
 
 ## What it does
 
 - It lets ordinary windows use some of the extended range that the display
   keeps for HDR highlights.
-- One slider sets the boost from 100 to 160 percent, and the app remembers
-  your choice.
-- If sleep or a display change resets the display, the app restores the boost
-  on its own.
-- You can have it start at login if you like.
-- Turning the boost off, or quitting the app, puts the display back exactly as
-  it was.
-- It works entirely on your Mac. There is no account and no server, and the
-  app never makes a network connection.
+- One slider sets the boost from 100 to 160 percent and the app remembers it.
+- The app restores the boost on its own after sleep or a display change.
+- It can start at login if you want it to.
+- Turning the boost off or quitting the app puts the display back exactly as it
+  was.
+- It runs entirely on your Mac and needs no account or server. It makes no
+  network connections.
 
 ## Install
 
 Download `The-Brightening-1.0.0.pkg` below and open it. macOS asks for an
-administrator password because the installer puts the app in your
-Applications folder. When the installer finishes, the app opens in the menu
-bar.
+administrator password because the installer puts the app in your Applications
+folder. The app opens in the menu bar when the installer finishes.
 
 ## Requirements
 
-You need a MacBook Pro with a Liquid Retina XDR display, which means a 14 inch
-or 16 inch model from 2021 or later with Apple silicon, and macOS 27 or later.
+You need a 14 inch or 16 inch MacBook Pro from 2021 or later with Apple silicon
+and a Liquid Retina XDR display. It must run macOS 27 or later.
 
 ## Verify the download
 
@@ -40,5 +36,5 @@ shasum -a 256 -c SHA256SUMS.txt
 
 ## About The Brightening
 
-The [README](https://github.com/drabhikroy/the-brightening#readme) explains
-how the app works and how to remove it.
+The [README](https://github.com/drabhikroy/the-brightening#readme) explains how
+the app works and how to remove it.
