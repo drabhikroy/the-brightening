@@ -11,23 +11,22 @@ normally allows.
 
 ![The Brightening popover in dark appearance, with the power button on, the Level slider at 160 percent, Launch at Login checked, and the About and Quit buttons](Screenshots/popover.png)
 
-The Brightening runs entirely on your Mac and needs no account or server. It
-makes no network connections.
+Everything happens on your Mac and the app never connects to the internet. That
+means there is no account to create and no server involved.
 
 ## What it does
 
 A MacBook Pro with a Liquid Retina XDR display can show HDR highlights that
 are far brighter than the white of an ordinary window. HDR stands for high
 dynamic range. The Brightening lets everything else on screen borrow some of
-that extra range. It lives in the menu bar and you control it from a small
-popover.
+that extra range through a small popover in the menu bar.
 
-- The power button turns the boost on and off. When it is off the display
-  returns to normal right away.
+- The power button turns the boost on and off and the display returns to normal
+  as soon as it is off.
 - The Level slider sets the boost anywhere from 100 to 160 percent and the app
   remembers your choice the next time it opens.
-- Sleep, display changes, and other apps can reset the display. The app
-  notices within a second and restores the boost.
+- Sleep and display changes can reset the display and so can other apps. The
+  app notices within a second and restores the boost.
 - Launch at Login is optional and becomes available once the app is in your
   Applications folder.
 
@@ -37,12 +36,12 @@ The Brightening works only on the built-in display and leaves external
 displays alone. That includes the Pro Display XDR.
 
 It does not change HDR video or photos because they already use the extended
-range. It also saves nothing to your display profile. Quitting the app or
+range. It also saves nothing to your display profile so quitting the app or
 turning the boost off puts the display back exactly as it was.
 
 ## Requirements
 
-The Brightening needs two things.
+To use The Brightening you need both of the following.
 
 - A 14 inch or 16 inch MacBook Pro from 2021 or later with Apple silicon and a
   Liquid Retina XDR display
@@ -56,7 +55,7 @@ On any other Mac the app opens but has nothing to boost.
    [latest release](https://github.com/drabhikroy/the-brightening/releases/latest).
 2. Open the package and follow the steps. macOS asks for an administrator
    password because the installer puts the app in your Applications folder.
-3. The app opens by itself when the installer finishes. Look in the menu bar
+3. The app opens by itself when the installer finishes so look in the menu bar
    for a sun rising out of a screen.
 
 Installing a newer version over an older one quits the running copy first and
@@ -66,7 +65,7 @@ opens the new one afterward.
 
 Each release includes a file named `SHA256SUMS.txt` that lets you confirm the
 package arrived intact. Put it in the same folder as the package and run the
-command below. It should report `OK` for the package.
+command below and it should report `OK` for the package.
 
 ```bash
 shasum -a 256 -c SHA256SUMS.txt
@@ -76,10 +75,10 @@ shasum -a 256 -c SHA256SUMS.txt
 
 1. Open the popover and clear **Launch at Login** if it is on so macOS does not
    open the app again.
-2. Click **Quit**. The display goes back to normal.
+2. Click **Quit** and the display goes back to normal.
 3. Move The Brightening from the Applications folder to the Trash.
 
-Run the command below to have macOS forget the install record as well. This
+Run the command below if you also want macOS to forget the install record. That
 step is optional and changes nothing else.
 
 ```bash
@@ -93,15 +92,14 @@ sudo pkgutil --forget com.abhikroy.thebrightening.pkg
 3. Drag the **Level** slider to choose how bright the screen gets.
 
 Right-click or Control-click the menu bar icon to reach **About The
-Brightening** and **Quit The Brightening**. The About window shows the
-version, the license, and a link to the latest release. The **About** button in
-the popover opens the same window.
+Brightening** and **Quit The Brightening**. The About window lists the version
+and the license and links to the latest release. You can open the same window
+from the **About** button in the popover.
 
 ## Your data
 
-The app makes no network connections. Links in the About window open in your
-browser only when you click them. The browser makes that connection and the app
-does not.
+The app makes no network connections of its own. Links in the About window open
+in your browser only when you click them and it is the browser that goes online.
 
 | What the app writes | Where | How long it stays |
 | --- | --- | --- |
@@ -109,10 +107,10 @@ does not.
 | The login item, when turned on | macOS login items | Until you turn it off |
 | The display brightness boost | The display's gamma table, in memory | Until the app quits or the boost is turned off |
 
-The installer keeps a small note for itself while it runs. The note records
-whether the app was open so the installer can quit it first and open the new
-copy afterward. It lives in a folder that only the system can write to and the
-installer deletes it before finishing.
+The installer keeps a small note recording whether the app was open while it
+runs so that it can quit the app first and open the new copy afterward. The
+note lives in a folder that only the system can write to and the installer
+deletes it before finishing.
 
 ## Accessibility
 
@@ -125,12 +123,13 @@ installer deletes it before finishing.
 - **Reduce Motion.** With Reduce Motion on the power button changes state at
   once and skips its press animation.
 - **Contrast.** Text and the slider fill meet the AA level of the Web Content
-  Accessibility Guidelines (WCAG) 2.2 in light and dark appearance. The dimmed
-  power symbol does too while the boost is off.
-- **More than color.** An off boost shows a raised button, a dimmed symbol, and
-  a faded slider that is disabled. Color is never the only signal.
-- **Menu bar.** The icon is a template image. macOS renders it to match a light
-  or dark menu bar and respects Increase Contrast.
+  Accessibility Guidelines (WCAG) 2.2 in light and dark appearance and so does
+  the dimmed power symbol while the boost is off.
+- **More than color.** An off boost is shown by a raised button, a dimmed
+  symbol, and a faded slider that is disabled so color is never the only
+  signal.
+- **Menu bar.** The icon is a template image so macOS renders it to match a
+  light or dark menu bar and respects Increase Contrast.
 
 ## How it works
 
@@ -142,12 +141,12 @@ the extra headroom.
 
 The app then writes a new gamma table to the built-in display. A gamma table is
 the list of values that tells the display how bright to make each shade. This
-one is a straight ramp from black up to the level you chose. Black stays black
+one is a straight ramp from black up to the level you chose so black stays black
 and every other value is scaled evenly. Values above standard white land in the
 extended range instead of clipping.
 
-The app checks the display once a second. It opens the headroom again if it has
-closed and writes the table again if something else has reset it.
+The app checks the display once a second and opens the headroom again if it has
+closed. It also writes the table again if something else has reset it.
 
 Putting the display back resets the gamma of every display rather than only the
 built-in one because macOS offers no way to reset a single display. An external
@@ -191,9 +190,9 @@ attributes added to its files while they are being signed and that breaks the
 signature.
 
 `build.sh` passes no optimizer flag and no deployment target to `swiftc`. The
-plain build is the one checked on an XDR display so test on the hardware before
-adding either one. Without a target the app requires the macOS version of the
-Mac that builds it and the build writes that version into `Info.plist`.
+plain build is the one checked on an XDR display so please test on the hardware
+before adding either one. Without a target the app requires the macOS version of
+the Mac that builds it and the build writes that version into `Info.plist`.
 
 ### Tests and standards gates
 
@@ -201,13 +200,13 @@ Mac that builds it and the build writes that version into `Info.plist`.
 python3 Scripts/standards_gate.py
 ```
 
-The gate enforces the house writing rules in [CONTRIBUTING.md](CONTRIBUTING.md).
-Continuous integration runs it and compiles the app on every push.
+The gate enforces the house writing rules in [CONTRIBUTING.md](CONTRIBUTING.md)
+and continuous integration runs it and compiles the app on every push.
 
 Two scripts help when a change touches the display. `Scripts/Diagnose.swift`
 prints the headroom and the gamma table of every display without changing
-anything. `Scripts/compare.sh` builds two copies of the repository in turn,
-runs each one, and records those readings so two builds can be compared as
+anything. `Scripts/compare.sh` builds two copies of the repository in turn and
+runs each one and records those readings so two builds can be compared as
 numbers.
 
 ```bash

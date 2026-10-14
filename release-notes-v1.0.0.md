@@ -6,13 +6,14 @@ allows. Click the menu bar icon to turn the boost on and set the level.
 
 - It lets ordinary windows use some of the extended range that the display
   keeps for HDR highlights.
-- One slider sets the boost from 100 to 160 percent and the app remembers it.
+- One slider sets the boost from 100 to 160 percent and the app remembers your
+  choice.
 - The app restores the boost on its own after sleep or a display change.
 - It can start at login if you want it to.
 - Turning the boost off or quitting the app puts the display back exactly as it
   was.
-- It runs entirely on your Mac and needs no account or server. It makes no
-  network connections.
+- Everything happens on your Mac and the app never connects to the internet so
+  it needs no account or server.
 
 ## Install
 
