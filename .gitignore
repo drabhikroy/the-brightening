@@ -1,0 +1,10 @@
+.DS_Store
+build/
+*.dSYM/
+*.log
+*.tmp
+*~
+
+dist/
+
+__pycache__/

@@ -1,0 +1,72 @@
+#!/bin/zsh
+set -eu
+
+APP_PATH="/Applications/The Brightening.app"
+PROCESS_NAME="TheBrightening"
+# /var/db is writable only by root. A fixed name in a shared folder such as
+# /var/tmp would let another account plant a link there before the install,
+# and the root owned write below would follow it.
+STATE_DIR="/private/var/db/com.abhikroy.thebrightening.install"
+STATE_FILE="$STATE_DIR/state"
+SCRIPT_DIR="${0:A:h}"
+
+# The installer runs as root, but the app runs as whoever is at the screen.
+# This script records that user and what state the app was in, so that
+# postinstall can reopen it for them afterward.
+/bin/rm -rf "$STATE_DIR"
+/bin/mkdir -m 700 "$STATE_DIR"
+
+CONSOLE_USER="$(/usr/bin/stat -f '%Su' /dev/console)"
+
+if [[ -z "$CONSOLE_USER" ||
+      "$CONSOLE_USER" == "root" ||
+      "$CONSOLE_USER" == "loginwindow" ]]; then
+    # Nobody is logged in at the console, as in a remote or managed
+    # install, so there is no one to reopen the app for.
+    printf 'none||\n' > "$STATE_FILE"
+    chmod 600 "$STATE_FILE"
+    exit 0
+fi
+
+CONSOLE_UID="$(/usr/bin/id -u "$CONSOLE_USER")"
+
+if [[ ! -d "$APP_PATH" ]]; then
+    MODE="new"
+elif /usr/bin/pgrep -U "$CONSOLE_UID" -x "$PROCESS_NAME" >/dev/null 2>&1; then
+    MODE="running"
+else
+    MODE="stopped"
+fi
+
+printf '%s|%s|%s\n' \
+    "$MODE" \
+    "$CONSOLE_USER" \
+    "$CONSOLE_UID" \
+    > "$STATE_FILE"
+
+chmod 600 "$STATE_FILE"
+
+if [[ "$MODE" != "running" ]]; then
+    exit 0
+fi
+
+# Quitting through the app, rather than killing the process, lets it put the
+# display back to normal brightness before its files are replaced.
+/bin/launchctl asuser "$CONSOLE_UID" \
+    /usr/bin/sudo -u "$CONSOLE_USER" \
+    "$SCRIPT_DIR/quit-the-brightening"
+
+# Give it up to ten seconds to finish.
+for attempt in {1..100}; do
+    if ! /usr/bin/pgrep \
+        -U "$CONSOLE_UID" \
+        -x "$PROCESS_NAME" \
+        >/dev/null 2>&1; then
+        exit 0
+    fi
+
+    /bin/sleep 0.1
+done
+
+echo "The Brightening did not quit cleanly. Installation stopped." >&2
+exit 1

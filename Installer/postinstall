@@ -1,0 +1,39 @@
+#!/bin/zsh
+set -eu
+
+APP_PATH="/Applications/The Brightening.app"
+# The folder preinstall writes to. The note there explains why it is in /var/db.
+STATE_DIR="/private/var/db/com.abhikroy.thebrightening.install"
+STATE_FILE="$STATE_DIR/state"
+
+if [[ ! -f "$STATE_FILE" ]]; then
+    exit 0
+fi
+
+STATE="$(/bin/cat "$STATE_FILE")"
+/bin/rm -rf "$STATE_DIR"
+
+IFS='|' read -r MODE CONSOLE_USER CONSOLE_UID <<< "$STATE"
+
+# Open the app after every install, so a person who installs it sees it appear
+# in the menu bar whether it was running, closed, or never installed. Only an
+# install with nobody at the screen skips this, because there is no session to
+# open it in.
+if [[ "$MODE" == "none" ]]; then
+    exit 0
+fi
+
+if [[ -z "$CONSOLE_USER" || -z "$CONSOLE_UID" ]]; then
+    exit 0
+fi
+
+if [[ ! -d "$APP_PATH" ]]; then
+    exit 1
+fi
+
+# Open it in the user's own session. Opened as root, it would run as root.
+/bin/launchctl asuser "$CONSOLE_UID" \
+    /usr/bin/sudo -u "$CONSOLE_USER" \
+    /usr/bin/open -g "$APP_PATH"
+
+exit 0

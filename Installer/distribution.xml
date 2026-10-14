@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="2">
+    <title>The Brightening VERSION_PLACEHOLDER</title>
+    <welcome file="welcome.html"/>
+    <conclusion file="conclusion.html"/>
+    <options customize="never" require-scripts="false"/>
+    <domains enable_anywhere="false" enable_currentUserHome="false" enable_localSystem="true"/>
+    <choices-outline>
+        <line choice="default">
+            <line choice="com.abhikroy.thebrightening.pkg"/>
+        </line>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="com.abhikroy.thebrightening.pkg" visible="false">
+        <pkg-ref id="com.abhikroy.thebrightening.pkg"/>
+    </choice>
+    <pkg-ref id="com.abhikroy.thebrightening.pkg" version="VERSION_PLACEHOLDER" onConclusion="none">component.pkg</pkg-ref>
+</installer-gui-script>

@@ -1,0 +1,12 @@
+* text=auto eol=lf
+
+*.sh          text eol=lf
+preinstall    text eol=lf
+postinstall   text eol=lf
+*.swift       text diff=swift
+*.md          text
+*.svg         text
+*.entitlements text
+*.png         binary
+
+*.md          linguist-documentation
